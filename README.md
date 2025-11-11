@@ -50,3 +50,12 @@ Este proyecto demuestra una arquitectura moderna y reactiva, cubriendo los sigui
 * `GET /products/{id}`
     * Devuelve un `Mono` (un) producto por su ID.
     * Devuelve un JSON de error 404 personalizado si no se encuentra.
+
+### Ejemplos de Prueba (Endpoints)
+
+Asegúrate de que el servicio esté corriendo (`:8081`).
+
+* **Probar `GET /products/{id}` (Éxito):**
+    * [http://localhost:8081/products/1](http://localhost:8081/products/1)
+* **Probar `GET /products/{id}` (Error 404):**
+    * [http://localhost:8081/products/999](http://localhost:8081/products/999)
