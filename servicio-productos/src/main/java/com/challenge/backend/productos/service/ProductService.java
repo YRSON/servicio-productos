@@ -1,6 +1,7 @@
 package com.challenge.backend.productos.service;
 
 import com.challenge.backend.productos.Model.Product;
+import com.challenge.backend.productos.exception.ProductNotFoundException;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -24,7 +25,8 @@ public class ProductService {
     public Mono<Product> findById(Long id){
         return Flux.fromIterable(productDataBase)
                 .filter(p -> p.id().equals(id))
-                .next();
+                .next()
+                .switchIfEmpty(Mono.error(new ProductNotFoundException("Producto con ID " + id + " no encontrado")));
     }
 
 }
