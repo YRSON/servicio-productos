@@ -1,6 +1,7 @@
 package com.challenge.backend.productos.service;
 
 import com.challenge.backend.productos.Model.Product;
+import com.challenge.backend.productos.exception.ProductNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
@@ -33,11 +34,11 @@ public class ProductServiceTest {
     }
 
     @Test
-    void findById_should_return_empty_when_not_exists() {
+    void findById_return_empty_when_not_exists() {
         Mono<Product> result = productService.findById(99L);
         StepVerifier.create(result)
-                .expectNextCount(0)
-                .verifyComplete();
+                .expectError(ProductNotFoundException.class)
+                .verify();
     }
 
 }
